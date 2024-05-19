@@ -5,7 +5,7 @@
         <GlobalHeader />
       </a-layout-header>
       <a-layout-content class="content">
-        <roter-view />
+        <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
         <a href="https://blog.csdn.net/m0_74870396?type=blog" target="_blank">
@@ -17,13 +17,14 @@
 </template>
 <script setup>
 import GlobalHeader from "@/components/GlobalHeader.vue";
+import router from "@/router";
 </script>
 <style scoped>
 #Basiclayout {
 }
 #Basiclayout .header {
   margin-bottom: 16px;
-  box-shadow: #eee 1px  1px  5px;
+  box-shadow: #eee 1px 1px 5px;
 }
 
 #Basiclayout .content {

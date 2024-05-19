@@ -7,6 +7,7 @@ export default {
   state: () => ({
     loginUser: {
       userName: "未登录",
+      role: "q",
     },
   }),
   //执行了这个actions,就调用mutation,更新用户名 未登录->诨号无敌鸭
