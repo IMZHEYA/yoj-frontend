@@ -1,7 +1,10 @@
+
 <template>
   <div id="Basiclayout">
     <a-layout style="height: 400px">
-      <a-layout-header class="header">Header</a-layout-header>
+      <a-layout-header class="header">
+        <GlobalHeader/>
+      </a-layout-header>
       <a-layout-content class="content">
       <roter-view/>  
       </a-layout-content>
@@ -13,7 +16,9 @@
     </a-layout>
   </div>
 </template>
-
+<script setup>
+import GlobalHeader from '@/components/GlobalHeader.vue';
+</script>
 <style scoped>
 #Basiclayout {
 }
