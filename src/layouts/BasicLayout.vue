@@ -1,12 +1,11 @@
-
 <template>
   <div id="Basiclayout">
     <a-layout style="height: 400px">
       <a-layout-header class="header">
-        <GlobalHeader/>
+        <GlobalHeader />
       </a-layout-header>
       <a-layout-content class="content">
-      <roter-view/>  
+        <roter-view />
       </a-layout-content>
       <a-layout-footer class="footer">
         <a href="https://blog.csdn.net/m0_74870396?type=blog" target="_blank">
@@ -17,19 +16,19 @@
   </div>
 </template>
 <script setup>
-import GlobalHeader from '@/components/GlobalHeader.vue';
+import GlobalHeader from "@/components/GlobalHeader.vue";
 </script>
 <style scoped>
 #Basiclayout {
 }
 #Basiclayout .header {
-  background: red;
   margin-bottom: 16px;
+  box-shadow: #eee 1px  1px  5px;
 }
 
 #Basiclayout .content {
-    /* 水平方向的渐变背景 */
-  background: linear-gradient(to right, #bbb, #fff); 
+  /* 水平方向的渐变背景 */
+  background: linear-gradient(to right, #bbb, #fff);
   margin-bottom: 16px;
 }
 
