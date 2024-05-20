@@ -1,4 +1,5 @@
 // initial state
+import ACCESS_ENUM from "@/access/accessEnum";
 import { StoreOptions } from "vuex";
 
 export default {
@@ -7,7 +8,7 @@ export default {
   state: () => ({
     loginUser: {
       userName: "未登录",
-      role: "q",
+      userRole: ACCESS_ENUM.NOT_LOGIN,
     },
   }),
   //执行了这个actions,就调用mutation,更新用户名 未登录->诨号无敌鸭
