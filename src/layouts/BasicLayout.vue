@@ -1,6 +1,6 @@
 <template>
   <div id="Basiclayout">
-    <a-layout style="height: 400px">
+    <a-layout style="min-height: 100vh">
       <a-layout-header class="header">
         <GlobalHeader />
       </a-layout-header>
@@ -36,7 +36,7 @@ import router from "@/router";
 #Basiclayout .footer {
   background: #efefef;
   padding: 16px;
-  position: absolute;
+  position: static;
   bottom: 0;
   left: 0;
   right: 0;
