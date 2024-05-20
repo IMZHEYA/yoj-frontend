@@ -1,5 +1,5 @@
 <template>
-  <a-row id="globalHeader" style="margin-bottom: 16px" align="center">
+  <a-row id="globalHeader" align="center" :wrap="false">
     <a-col flex="auto">
       <a-menu
         mode="horizontal"
@@ -16,7 +16,7 @@
             <div class="title">Y OJ</div>
           </div>
         </a-menu-item>
-        <a-menu-item v-for="item in routes" :key="item.path">
+        <a-menu-item v-for="item in visible" :key="item.path">
           {{ item.name }}
         </a-menu-item>
       </a-menu>
@@ -44,6 +44,12 @@ const doMenuClick = (key: string) => {
   });
 };
 const store = useStore();
+const visible = routes.filter((item, index) => {
+  if (item.meta?.hideInMenu) {
+    return false;
+  }
+  return true;
+});
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
