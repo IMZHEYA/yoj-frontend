@@ -1,3 +1,4 @@
+import { UserControllerService } from './../../generated/services/UserControllerService';
 // initial state
 import ACCESS_ENUM from "@/access/accessEnum";
 import { StoreOptions } from "vuex";
@@ -8,14 +9,21 @@ export default {
   state: () => ({
     loginUser: {
       userName: "未登录",
-      userRole: ACCESS_ENUM.NOT_LOGIN,
     },
   }),
   //执行了这个actions,就调用mutation,更新用户名 未登录->诨号无敌鸭
   actions: {
     //todo 改成从远程请求获取登录信息
-    getLoginUser({ commit, state }, payload) {
-      commit("updateUser", { userName: "诨号无敌鸭" });
+    async getLoginUser({ commit, state }, payload) {
+    const res = await UserControllerService.getLoginUserUsingGet();
+    if (res.code === 0) {
+      commit("updateUser", res.data);
+    } else {
+      commit("updateUser", {
+        ...state.loginUser,
+        userRole: ACCESS_ENUM.NOT_LOGIN,
+      });
+    }
     },
   },
   //修改状态变量
