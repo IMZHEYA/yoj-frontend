@@ -1,6 +1,6 @@
 <template>
-  <div id="userLoginView">
-    <h3 style="margin-bottom: 16px">用户登录</h3>
+  <div id="userRegisterView">
+    <h3 style="margin-bottom: 16px">用户注册</h3>
     <a-form
       label-align="left"
       auto-label-width
@@ -17,10 +17,15 @@
           placeholder="请输入密码"
         />
       </a-form-item>
-      <a-form-item>
-        <a-button type="primary" html-type="submit">登录</a-button>
+      <a-form-item field="checkPassword" tooltip="密码不少于8位" label="密码">
+        <a-input-password
+          v-model="form.checkPassword"
+          placeholder="请确认密码"
+        />
+      </a-form-item>
 
-        <a-button type="primary" style="margin-left: 300px "  @click="toRegister">注册</a-button>
+      <a-form-item>
+        <a-button type="primary" html-type="submit">注册</a-button>
       </a-form-item>
     </a-form>
   </div>
@@ -34,30 +39,26 @@ import { UserControllerService } from "../../../generated/services/UserControlle
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { UserRegisterRequest } from "../../../generated/models/UserRegisterRequest";
 
 const router = useRouter();
 const store = useStore();
 const form = reactive({
   userAccount: "",
   userPassword: "",
-} as UserLoginRequest);
+  checkPassword: "",
+} as UserRegisterRequest);
 const handleSubmit = async (data: any) => {
-  const res = await UserControllerService.userLoginUsingPost(form);
-  //登录成功，跳转到主页
-  await store.dispatch("user/getLoginUser");
+  const res = await UserControllerService.userRegisterUsingPost(form);
+  //注册成功，跳转到登录页面
   if (res.code === 0) {
+    message.success("注册成功，请登录");
     router.push({
-      path: "/",
-      replace: true, //替换当前页面， 就是返回也不会返回到登录页面了
+      path: "/user/login",
+      replace: true, //替换当前页面， 就是返回也不会返回到注册页面了
     });
   } else {
-    message.error("登录失败," + res.message);
+    message.error("注册失败," + res.message);
   }
 };
-//点击注册按钮跳转到注册页
-const toRegister = () => {
-  router.push({
-    path: "/user/Register",
-  });
-}
 </script>
