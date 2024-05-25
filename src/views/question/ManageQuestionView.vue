@@ -1,7 +1,9 @@
 <template>
   <div id="manageQuestionView">
     <h1>题目管理</h1>
+
     <a-table
+      :ref="tableRef"
       :columns="columns"
       :data="dataList"
       :pagination="{
@@ -12,8 +14,10 @@
       }"
     >
       <template #optional="{ record }">
-        <a-button type="primary" @click="doUpdate(record)">修改</a-button>
-        <a-button status="danger" @click="doDelete(record)">刪除</a-button>
+        <a-space>
+          <a-button type="primary" @click="doUpdate(record)">修改</a-button>
+          <a-button status="danger" @click="doDelete(record)">刪除</a-button>
+        </a-space>
       </template>
     </a-table>
   </div>
@@ -23,8 +27,10 @@
 import { onMounted, ref } from "vue";
 import { Question, QuestionControllerService } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
+import { useRouter } from "vue-router";
 const dataList = ref([]);
 const total = ref(0);
+const tableRef = ref();
 const searchParams = ref({
   pageSize: 10,
   pageNum: 1,
@@ -51,12 +57,21 @@ const doDelete = async (question: Question) => {
   });
   if (res.code === 0) {
     message.success("删除成功");
-    //更新表格中的数据
+    //自动更新表格中的数据
+    loadData();
+  } else {
+    message.error("删除失败");
   }
 };
-
+//更新数据
+const router = useRouter();
 const doUpdate = (question: Question) => {
-  console.log(question);
+  router.push({
+    path: "/update/question",
+    query: {
+      id: question.id,
+    },
+  });
 };
 const columns = [
   {

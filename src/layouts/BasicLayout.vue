@@ -29,7 +29,7 @@ import router from "@/router";
 
 #Basiclayout .content {
   /* 水平方向的渐变背景 */
-  background: linear-gradient(to right, #bbb, #fff);
+  background: linear-gradient(to right, #fefefe, #fff);
   margin-bottom: 16px;
 }
 
