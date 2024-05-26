@@ -31,7 +31,7 @@ const dataList = ref([]);
 const total = ref(0);
 const tableRef = ref();
 let searchParams = ref({
-  pageSize: 2,
+  pageSize: 10,
   current: 1,
 });
 const OnPageChange = (page: number) => {
