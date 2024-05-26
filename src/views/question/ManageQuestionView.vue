@@ -31,18 +31,15 @@ const dataList = ref([]);
 const total = ref(0);
 const tableRef = ref();
 let searchParams = ref({
-  pageSize: 10,
+  pageSize: 2,
   current: 1,
 });
-const OnPageChange = (page:number) => {
-searchParams.value = {
-  ...searchParams.value,
-  current: page,
-}
+const OnPageChange = (page: number) => {
+  searchParams.value = {
+    ...searchParams.value,
+    current: page,
+  };
 };
-watchEffect(() => {
-  loadData();
-})
 const loadData = async () => {
   const res = await QuestionControllerService.listQuestionByPageUsingPost(
     searchParams.value
@@ -54,6 +51,9 @@ const loadData = async () => {
     message.error("加载失败，" + res.message);
   }
 };
+watchEffect(() => {
+  loadData();
+});
 //页面加载时请求数据
 onMounted(() => {
   loadData();
