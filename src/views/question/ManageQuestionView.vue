@@ -1,17 +1,16 @@
 <template>
   <div id="manageQuestionView">
-    <h1>题目管理</h1>
-
     <a-table
       :ref="tableRef"
       :columns="columns"
       :data="dataList"
       :pagination="{
         pageSize: searchParams.pageSize,
-        current: searchParams.pageNum,
+        current: searchParams.current,
         total: total,
         showTotal: true,
       }"
+      @page-change="OnPageChange"
     >
       <template #optional="{ record }">
         <a-space>
@@ -24,17 +23,26 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watchEffect } from "vue";
 import { Question, QuestionControllerService } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
 const dataList = ref([]);
 const total = ref(0);
 const tableRef = ref();
-const searchParams = ref({
+let searchParams = ref({
   pageSize: 10,
-  pageNum: 1,
+  current: 1,
 });
+const OnPageChange = (page:number) => {
+searchParams.value = {
+  ...searchParams.value,
+  current: page,
+}
+};
+watchEffect(() => {
+  loadData();
+})
 const loadData = async () => {
   const res = await QuestionControllerService.listQuestionByPageUsingPost(
     searchParams.value
