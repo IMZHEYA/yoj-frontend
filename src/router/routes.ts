@@ -33,26 +33,27 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/add/question",
     name: "创建题目",
     component: AddQuestionView,
-    // meta: {
-    //   hideInMenu: true,
-    // },
+    meta: {
+      access: ACCESS_ENUM.USER,
+    },
   },
   {
     path: "/update/question",
     name: "更新题目",
     component: AddQuestionView,
-    // meta: {
-    //   hideInMenu: true,
-    // },
+    meta: {
+      access: ACCESS_ENUM.USER,
+      hideInMenu: true,
+    },
   },
 
   {
     path: "/manage/question",
     name: "管理题目",
     component: ManageQuestionView,
-    // meta: {
-    //   hideInMenu: true,
-    // },
+    meta: {
+      access: ACCESS_ENUM.ADMIN,
+    },
   },
   {
     path: "/",
@@ -63,30 +64,33 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/noAuth",
     name: "无权限",
     component: NoAuthView,
-  },
-  {
-    path: "/hide",
-    name: "隐藏页面",
-    component: HomeView,
     meta: {
       hideInMenu: true,
     },
   },
-  {
-    path: "/admin",
-    name: "管理员可见",
-    component: AdminView,
-    meta: {
-      access: ACCESS_ENUM.ADMIN,
-    },
-  },
+  // {
+  //   path: "/hide",
+  //   name: "隐藏页面",
+  //   component: HomeView,
+  //   meta: {
+  //     hideInMenu: true,
+  //   },
+  // },
+  // {
+  //   path: "/admin",
+  //   name: "管理员可见",
+  //   component: AdminView,
+  //   meta: {
+  //     access: ACCESS_ENUM.ADMIN,
+  //   },
+  // },
 
-  {
-    path: "/about",
-    name: "关于我的",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import("../views/AboutView.vue"),
-  },
+  // {
+  //   path: "/about",
+  //   name: "关于我的",
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import("../views/AboutView.vue"),
+  // },
 ];
