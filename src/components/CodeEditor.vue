@@ -25,6 +25,7 @@ interface Props {
 /**
  * 给组件指定初始值
  */
+//监听language属性，动态更改编辑器的语言
 const props = withDefaults(defineProps<Props>(), {
   value: () => "",
   language: () => "java",
@@ -51,7 +52,17 @@ const props = withDefaults(defineProps<Props>(), {
 //     });
 //   }
 // );
-
+watch(
+  () => props.language,
+  () => {
+    if (codeEditor.value) {
+      monaco.editor.setModelLanguage(
+        toRaw(codeEditor.value).getModel(),
+        props.language
+      );
+    }
+  }
+);
 onMounted(() => {
   if (!codeEditorRef.value) {
     return;
