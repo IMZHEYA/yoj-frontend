@@ -23,7 +23,12 @@
     </a-col>
     <a-col flex="100px">
       <div>
-        <a-avatar shape="circle"> //todo </a-avatar>
+        <a-avatar shape="circle">
+          <img
+            alt="avatar"
+            :src="userAvatar"
+            class="userAvatar"
+        /></a-avatar>
       </div>
     </a-col>
   </a-row>
@@ -47,6 +52,8 @@ const doMenuClick = (key: string) => {
   });
 };
 const store = useStore();
+const loginUser = store.state.user.loginUser;
+const userAvatar = loginUser.userAvatar;
 const visibleRoutes = computed(() => {
   return routes.filter((item, index) => {
     if (item.meta?.hideInMenu) {
