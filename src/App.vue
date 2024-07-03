@@ -13,7 +13,6 @@ import { useRoute, useRouter } from "vue-router";
 import BasicLayout from "./layouts/BasicLayout.vue";
 import { useStore } from "vuex";
 import { onMounted } from "vue";
-
 const router = useRouter();
 
 const route = useRoute();

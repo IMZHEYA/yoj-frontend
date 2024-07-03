@@ -8,4 +8,9 @@ import "@/access";
 import "bytemd/dist/index.css";
 // 额外引入图标库
 import ArcoVueIcon from "@arco-design/web-vue/es/icon";
-createApp(App).use(ArcoVue).use(store).use(router).use(ArcoVueIcon).mount("#app");
+createApp(App)
+  .use(ArcoVue)
+  .use(store)
+  .use(router)
+  .use(ArcoVueIcon)
+  .mount("#app");
