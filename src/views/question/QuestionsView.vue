@@ -71,7 +71,7 @@ const tableRef = ref();
 const searchParams = ref<QuestionQueryRequest>({
   title: "",
   tags: [],
-  pageSize: 10,
+  pageSize: 2,
   current: 1,
 });
 const loadData = async () => {

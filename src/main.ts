@@ -6,5 +6,6 @@ import router from "./router";
 import store from "./store";
 import "@/access";
 import "bytemd/dist/index.css";
-
-createApp(App).use(ArcoVue).use(store).use(router).mount("#app");
+// 额外引入图标库
+import ArcoVueIcon from "@arco-design/web-vue/es/icon";
+createApp(App).use(ArcoVue).use(store).use(router).use(ArcoVueIcon).mount("#app");

@@ -22,7 +22,9 @@
       </a-menu>
     </a-col>
     <a-col flex="100px">
-      <div>{{ store.state.user.loginUser.userName }}</div>
+      <div>
+        <a-avatar shape="circle"> //todo </a-avatar>
+      </div>
     </a-col>
   </a-row>
 </template>
