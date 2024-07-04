@@ -8,10 +8,28 @@
         <a-input-tag v-model="form.tags" placeholder="请选择标签" allow-clear />
       </a-form-item>
       <a-form-item field="content" label="题目内容">
-        <MdEditor :value="form.content" :handle-change="onContentChange" />
+        <md-editor
+          @click="
+            contentZIndex = 2;
+            answerZIndex = 1;
+          "
+          :style="`z-index: ${contentZIndex}`"
+          mode="split"
+          :value="form.content"
+          :handle-change="onContentChange"
+        />
       </a-form-item>
       <a-form-item field="answer" label="答案">
-        <MdEditor :value="form.answer" :handle-change="onAnswerChange" />
+        <md-editor
+          @click="
+            contentZIndex = 1;
+            answerZIndex = 2;
+          "
+          :style="`z-index: ${answerZIndex}`"
+          mode="split"
+          :value="form.answer"
+          :handle-change="onAnswerChange"
+        />
       </a-form-item>
       <a-form-item label="判题配置" :content-flex="false" :merge-props="false">
         <a-space direction="vertical" style="min-width: 480px">
@@ -106,6 +124,8 @@ import {
 } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import { useRoute } from "vue-router";
+const contentZIndex = ref(1);
+const answerZIndex = ref(1);
 const route = useRoute();
 //如果页面路由地址包含update,视为更新页面
 const updatePage = route.path.includes("update");
