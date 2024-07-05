@@ -6,6 +6,7 @@ import ACCESS_ENUM from "@/access/accessEnum";
 import UserLayout from "@/layouts/UserLayout.vue";
 import UserLoginView from "@/views/user/UserLoginView.vue";
 import UserRegisterView from "@/views/user/UserRegisterView.vue";
+import UserManageView from "@/views/user/UserManageView.vue";
 import AddQuestionView from "@/views/question/AddQuestionView.vue";
 import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
 import QuestionsView from "@/views/question/QuestionsView.vue";
@@ -35,11 +36,6 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "主页",
-    component: QuestionsView,
-  },
-  {
-    path: "/questions",
-    name: "浏览题目",
     component: QuestionsView,
   },
   {
@@ -81,6 +77,14 @@ export const routes: Array<RouteRecordRaw> = [
     component: ManageQuestionView,
     meta: {
       access: ACCESS_ENUM.ADMIN,
+    },
+  },
+  {
+    path: "/manage/user",
+    name: "用户管理",
+    component: UserManageView,
+    meta: {
+      access: ACCESS_ENUM.USER,
     },
   },
   {
