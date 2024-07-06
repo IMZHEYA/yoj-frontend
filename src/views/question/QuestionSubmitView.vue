@@ -31,13 +31,28 @@
         current: searchParams.current,
         total,
       }"
-     @page-change="onPageChange"
+      @page-change="onPageChange"
     >
       <template #judgeInfo="{ record }">
-        {{ JSON.stringify(record.judgeInfo) }}
+        <a-tag :color="handleColor(record.judgeInfo?.message)">
+          {{ record?.judgeInfo?.message || "编译出错" }}
+        </a-tag>
+      </template>
+      <template #status="{ record }">
+        {{ record?.status === 2 ? "判题成功" : "判题失败" }}
       </template>
       <template #createTime="{ record }">
         {{ moment(record.createTime).format("YYYY-MM-DD") }}
+      </template>
+      <template #optional="{ record }">
+        <a-space>
+          <a-button
+            type="primary"
+            v-if="loginUser.id === record.userId"
+            @click="toQuestionPage(record)"
+            >查看详情
+          </a-button>
+        </a-space>
       </template>
     </a-table>
   </div>
@@ -51,8 +66,11 @@ import {
   QuestionSubmitQueryRequest,
 } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
-import { useRouter } from "vue-router";
 import moment from "moment";
+import store from "@/store";
+import { useRouter } from "vue-router";
+const router = useRouter();
+const loginUser = store.state.user.loginUser;
 const dataList = ref([]);
 const total = ref(0);
 const tableRef = ref();
@@ -100,6 +118,7 @@ const columns = [
   {
     title: "判题状态",
     dataIndex: "status",
+    slotName: "status",
   },
   {
     title: "题目 id",
@@ -110,10 +129,23 @@ const columns = [
     dataIndex: "userId",
   },
   {
-    title: "创建时间",
+    title: "提交时间",
     slotName: "createTime",
   },
+  {
+    title: "操作",
+    slotName: "optional",
+  },
 ];
+//根据题目提交状态更改标签颜色
+const handleColor = (record: any): string => {
+  if (record === "通过") {
+    return "green";
+  } else {
+    return "red";
+  }
+};
+
 const onPageChange = (page: number) => {
   searchParams.value = {
     ...searchParams.value,
@@ -128,6 +160,12 @@ const doSubmit = () => {
     ...searchParams.value,
     current: 1,
   };
+};
+//跳转到题目提交详情界面
+const toQuestionPage = (question:Question) => {
+  router.push({
+    path: `/submissions/detail/${question.id}`,
+  });
 };
 </script>
 
