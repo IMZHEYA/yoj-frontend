@@ -12,6 +12,7 @@ import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
 import QuestionsView from "@/views/question/QuestionsView.vue";
 import QuestionSubmitView from "@/views/question/QuestionSubmitView.vue";
 import ViewQuestionView from "@/views/question/ViewQuestionView.vue";
+import QuestionsSubmissionsDetailVue from "@/views/question/QuestionsSubmissionsDetail.vue.vue";
 export const routes: Array<RouteRecordRaw> = [
   {
     path: "/user",
@@ -91,6 +92,14 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/noAuth",
     name: "无权限",
     component: NoAuthView,
+    meta: {
+      hideInMenu: true,
+    },
+  },
+  {
+    path: "/submissions/detail/:id",
+    name: "题目提交详情页",
+    component: QuestionsSubmissionsDetailVue,
     meta: {
       hideInMenu: true,
     },
